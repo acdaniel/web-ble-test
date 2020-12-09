@@ -18,7 +18,6 @@
       connection = c
       let buf = ''
       connection.on('data', function(d) {
-        console.log(d)
         buf += d
         let i = buf.indexOf('\n')
         while (i >= 0) {
@@ -27,14 +26,14 @@
           i = buf.indexOf('\n')
         }
       })
-      connection.write('reset();\n', function () {
-        setTimeout(function () {
-          connection.write(
-            "setInterval(function() { Bluetooth.println(Ruuvitag.getAccelData()) }, 100); NRF.on('disconnect', function () { reset(); };\n", 
-            function () { console.log('Ready...') }
-          )
-        }, 1500)
-      })
+//       connection.write('reset();\n', function () {
+//         setTimeout(function () {
+//           connection.write(
+//             "setInterval(function() { Bluetooth.println(Ruuvitag.getAccelData()) }, 100); NRF.on('disconnect', function () { reset(); };\n", 
+//             function () { console.log('Ready...') }
+//           )
+//         }, 1500)
+//       })
     })
   }
                 
