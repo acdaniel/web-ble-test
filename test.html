@@ -1,50 +1,50 @@
 <html>
- <head>
- </head>
- <body>
-  <script src="https://www.puck-js.com/puck.js"></script>
-  <script type="text/javascript">
-   let connection
-   function connect() {
+<head>
+</head>
+<body>
+<script src="https://www.puck-js.com/puck.js"></script>
+<script type="text/javascript">
+  let connection
+  function connect() {
     if(connection) {
-     connection.close()
-     connection = undefined
-    }
-    Puck.connect(function (c) {
-     if (!c) {
-      alert('Could not connect')
-      return
-     }
-     connection = c
-     let buf = ''
-     connection.on('data', function(d) {
-      buf += d
-      let i = buf.indexOf('\n')
-      while (i >= 0) {
-       console.log(buf.substr(0, i))
-       buf = buf.substr(i + 1)
-       i = buf.indexOf('\n')
-      }
-     })
-     connection.write('reset();\n', function () {
-      setTimeout(function () {
-       connection.write(
-        "var Ruuvitag = require('Ruuvitag');Ruuvitag.setAccelOn(true);setInterval(function(){Bluetooth.println(Ruuvitag.getAccelData());}, 100};NRF.on('disconnect', function () {reset();};\n", 
-        function () { console.log('Ready...') }
-       )
-      }, 1500)
-     })
-    })
-   }
-                 
-   function disconnect() {
-     if(connection) {
       connection.close()
       connection = undefined
-     }
-   }
-  </script>
-  <button onclick="connect()">Connect</button>
-  <button onclick="disconnect()">Disconnect</button>
- </body>
+    }
+    Puck.connect(function (c) {
+      if (!c) {
+        alert('Could not connect')
+        return
+      }
+      connection = c
+      let buf = ''
+      connection.on('data', function(d) {
+        buf += d
+        let i = buf.indexOf('\n')
+        while (i >= 0) {
+          console.log(buf.substr(0, i))
+          buf = buf.substr(i + 1)
+          i = buf.indexOf('\n')
+        }
+      })
+      connection.write('reset();\n', function () {
+        setTimeout(function () {
+          connection.write(
+            "var Ruuvitag = require('Ruuvitag');Ruuvitag.setAccelOn(true);setInterval(function(){Bluetooth.println(Ruuvitag.getAccelData());}, 100};NRF.on('disconnect', function () {reset();};\n", 
+            function () { console.log('Ready...') }
+          )
+        }, 1500)
+      })
+    })
+  }
+                
+  function disconnect() {
+    if (connection) {
+      connection.close()
+      connection = undefined
+    }
+  }
+</script>
+<button onclick="connect()">Connect</button>
+<button onclick="disconnect()">Disconnect</button>
+</body>
 </html>
