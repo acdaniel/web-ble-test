@@ -24,15 +24,17 @@
        console.log(buf.substr(0, i))
        buf = buf.substr(i + 1)
        i = buf.indexOf('\n')
-     }
-    })
+      }
+     })
      connection.write('reset();\n', function () {
       setTimeout(function () {
        connection.write(
         "var Ruuvitag = require('Ruuvitag');Ruuvitag.setAccelOn(true);setInterval(function(){Bluetooth.println(Ruuvitag.getAccelData());}, 100};NRF.on('disconnect', function () {reset();};\n", 
-        function () { console.log('Ready...') })
+        function () { console.log('Ready...') }
+       )
       }, 1500)
      })
+    })
    }
                  
    function disconnect() {
