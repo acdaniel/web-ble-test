@@ -18,6 +18,7 @@
       connection = c
       let buf = ''
       connection.on('data', function(d) {
+        console.log(d)
         buf += d
         let i = buf.indexOf('\n')
         while (i >= 0) {
